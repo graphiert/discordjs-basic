@@ -42,38 +42,40 @@ module.exports = {
         filter: collectorFilter,
         time: 60_000,
       });
-      if (cont.customId === "button1") {
-        await cont.reply({
-          content:
-            "Message replied. This is sent because you select Reply option",
-          components: [],
-          ephemeral: true,
-        });
-        await interaction.editReply({
-          content: "This is examples of Discord buttons.",
-          components: [],
-        });
-      }
-      if (cont.customId === "button2") {
-        await interaction.editReply({
-          content:
-            "Mesage edited. This message is edited because you select Edit option.",
-          components: [],
-        });
-      }
-      if (cont.customId === "button3") {
-        await cont.deferReply({
-          ephemeral: true,
-        });
-        await cont.followUp({
-          content:
-            "Message replied. This message is edited because you select Follow Up option.",
-          components: [],
-        });
-        await interaction.editReply({
-          content: "This is examples of Discord buttons.",
-          components: [],
-        });
+      switch (cont.customId) {
+        case "button1":
+          await cont.reply({
+            content:
+              "Message replied. This is sent because you select Reply option",
+            components: [],
+            ephemeral: true,
+          });
+          await interaction.editReply({
+            content: "This is examples of Discord buttons.",
+            components: [],
+          });
+          break;
+        case "button2":
+          await interaction.editReply({
+            content:
+              "Mesage edited. This message is edited because you select Edit option.",
+            components: [],
+          });
+          break;
+        case "button3":
+          await cont.deferReply({
+            ephemeral: true,
+          });
+          await cont.followUp({
+            content:
+              "Message replied. This message is edited because you select Follow Up option.",
+            components: [],
+          });
+          await interaction.editReply({
+            content: "This is examples of Discord buttons.",
+            components: [],
+          });
+          break;
       }
     } catch (err) {
       await interaction.editReply({
