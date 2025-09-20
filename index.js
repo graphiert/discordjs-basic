@@ -7,7 +7,13 @@ const {
 } = require("discord.js");
 require("dotenv").config();
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.GuildMessageReactions,
+  ],
+});
 
 client.commands = new Collection();
 
@@ -21,7 +27,8 @@ client.once(Events.ClientReady, (readyClient) => {
 });
 
 client.on(Events.InteractionCreate, async (interaction) => {
-  if (!interaction.isChatInputCommand()) return;
+  if (!interaction.isChatInputCommand() && !interaction.isContextMenuCommand())
+    return;
 
   const command = interaction.client.commands.get(interaction.commandName);
 
