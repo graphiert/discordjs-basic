@@ -11,9 +11,7 @@ const rest = new REST().setToken(process.env.BOT_TOKEN);
 
 (async () => {
   try {
-    console.log(
-      `Started refreshing ${commands.length} application (/) commands.`,
-    );
+    console.log(`Started refreshing ${commands.length} application commands.`);
 
     const data = await rest.put(
       Routes.applicationCommands(process.env.CLIENT_ID),
@@ -22,9 +20,7 @@ const rest = new REST().setToken(process.env.BOT_TOKEN);
       },
     );
 
-    console.log(
-      `Successfully reloaded ${data.length} application (/) commands.`,
-    );
+    console.log(`Successfully reloaded ${data.length} application commands.`);
   } catch (error) {
     console.error(error);
   }
